@@ -25,4 +25,17 @@ export class TasksComponent implements OnInit {
       );
     });
   }
+
+  toggleReminder(task: Task) {
+    task.reminder = !task.reminder;
+    this.taskService.updateTask(task).subscribe((updatedTask: Task) => {
+      task = updatedTask;
+    });
+  }
+
+  addTask(taskToAdd: Task) {
+    this.taskService.addTask(taskToAdd).subscribe((addedTask: Task) => {
+      this.tasks.push(addedTask);
+    })
+  }
 }
